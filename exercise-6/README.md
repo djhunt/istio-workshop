@@ -61,11 +61,13 @@ Note for windows -  You will need to manually run each command from that file an
 ```
   $ curl 146.148.33.1/echo/universe
 
-  {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},
+  {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
+  "Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},
 
   $ curl 146.148.33.1/echo/universe
 
-  {"greeting":{"hostname":"helloworld-service-v2-1009285752-n2tpb","greeting":"Hello universe from helloworld-service-v2-1009285752-n2tpb with 2.0","version":"2.0"}
+  {"greeting":{"hostname":"helloworld-service-v2-1009285752-n2tpb","greeting":\
+  "Hello universe from helloworld-service-v2-1009285752-n2tpb with 2.0","version":"2.0"}
 
 ```
 
