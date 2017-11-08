@@ -29,12 +29,15 @@ Istio related commands need to have `istioctl` in the path.  Verify it is availa
 #### Install Istio on the Kubernetes Cluster
 
 1 - First grant cluster admin permissions to the current user (admin permissions are required to create the necessary RBAC rules for Istio):
-
+``` 
+    bx account users
 ```
+Take the output to the next command
+<pre>
     kubectl create clusterrolebinding cluster-admin-binding \
         --clusterrole=cluster-admin \
-        --user=$(gcloud config get-value core/account)
-```
+        --user=<i><b>user</b></i>
+</pre>
 2 - Next install Istio on the Kubernetes cluster:
 
 Change to the Istio directory (istio-0.2.12) and and install istio in the kubernetes cluster
