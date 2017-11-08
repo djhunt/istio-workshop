@@ -22,13 +22,7 @@ If you look at the pod status some of the Pods will show a `Pending` state.   Th
 
 `kubectl describe pod helloworld-service...`
 
-4 - We can easily spin up another Compute Engine instance to append to the cluster.
-
-`gcloud container clusters resize guestbook --size=5`
-
-`gcloud compute instances list`
-
-5 - Verify the new instance has joined the Kubernetes cluster, you’ll should be able to see it with this command:
+4 - Verify the new instance has joined the Kubernetes cluster, you’ll should be able to see it with this command:
 
 `kubectl get nodes`
 
