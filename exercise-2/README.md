@@ -63,6 +63,5 @@ There are other containers running too. The interesting one is the pause contain
 
 A pause container is how Kubernetes uses Docker containers to create shared namespaces so that the actual application containers within the same Pod can share resources.
 
-#### Optional - [Peering under the covers of Kubernetes](optional.md)
 
 #### [Continue to Exercise 3 - Creating a Kubernetes Service](../exercise-3/README.md)
