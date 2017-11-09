@@ -1,4 +1,10 @@
 ## Exercise 1 - Startup a Kubernetes Cluster
+If your cluster has been provisioned for you, simply run:
+```
+    bx cs cluster-config [your_cluster_name]
+    export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/wordpress/kube-config-dal10-wordpress.yml
+```
+Or else, follow these steps:
 
 1. Create your free Kubernetes cluster
     ```bash
