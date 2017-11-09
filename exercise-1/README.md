@@ -28,7 +28,7 @@
 
 ## Note
 
-This will take a few minutes to run. Behind the scenes, Bluemix will create and configure the Kubernetes worker node(s). 
+The cluster will take some time to be provisioned. This step is better done before the lab. 
 
 
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
