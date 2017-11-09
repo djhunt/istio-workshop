@@ -66,10 +66,10 @@ Convert the binary file to an executable. `chmod +x /usr/local/bin/kubectl`
 
 To manage a private image repository, install the Bluemix Container Registry plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is bx cr.
 
-
-`bx plugin install container-registry -r Bluemix`    
+`bx plugin install container-registry -r Bluemix`       
 To verify that the plug-in is installed properly, run    
 `bx plugin list`    
-The plug-in is displayed in the results as `container-registry`.
+The plug-in is displayed in the results as    
+`container-registry`.
 
 To build images locally and push them to your registry namespace, install Docker If you are using Windows 8 or earlier, you can install the Docker Toolbox External link icon instead. The Docker CLI is used to build apps into images. The prefix for running commands by using the Docker CLI is docker.
