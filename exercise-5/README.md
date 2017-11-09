@@ -54,8 +54,8 @@ Change to the Istio directory (istio-0.2.12) and and install istio in the kubern
 Istio is deployed in a separate Kubernetes namespace `istio-system`  You can watch the state of Istio and other services and pods using the watch command.  For example in 2 separate terminal windows run:
 
 ```
-  watch -n 30 kubectl get po --all-namespaces
-  watch -n 30 kubectl get svc --all-namespaces
+  kubectl get po --all-namespaces
+  kubectl get svc --all-namespaces
 ```
 
 #### [Continue to Exercise 6 - Creating a Service Mesh with Istio Proxy](../exercise-6/README.md)
