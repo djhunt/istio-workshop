@@ -47,7 +47,7 @@ http://104.197.73.207:3000/dashboard/db/istio-dashboard
 But...that’s tedious to do for every service in your mesh. Instead, let’s apply our telemetry configuration to the whole mesh:
 
 ```
-    istioctl mixer rule create global global -f global_telemetry.yaml
+    istioctl create -f global_telemetry.yaml
 ```
 
 (Note: we have to use a different config file because in 0.1 Mixer rules are full document writes; in 0.2 configuration is much more granular)
@@ -64,14 +64,13 @@ We can also see the logs Mixer creates for our services:
 Then apply a 1 request per second rate limit from the UI to the helloworld-service
 
 ```
-    istioctl mixer rule create global helloworld-service.default.svc.cluster.local -f \
-    rate-limit-ui-service.yaml
+    istioctl create -f rate-limit-ui-service.yaml
 ```
 
 Then we can drive traffic to the UI to see the rate limit in action:
 
 ```
-    watch -n 0.1 curl -i <IP>/echo/foo
+    watch -n 0.1 curl -i <IP>:<PORT>/echo/foo
 ```
 
 and in grafana we can see the 429’s.
