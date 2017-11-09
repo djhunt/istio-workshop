@@ -23,6 +23,7 @@ Push the new configuration to Mixer for a specific service.
 ```
   istioctl mixer rule create helloworld-service.default.svc.cluster.local \
   helloworld-service.default.svc.cluster.local -f telemetry_rule.yaml
+  
   istioctl mixer rule create helloworld-ui.default.svc.cluster.local \ 
   helloworld-ui.default.svc.cluster.local -f telemetry_rule.yaml
 ```
