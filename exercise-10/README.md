@@ -21,8 +21,10 @@ Validate that the selected service has no service-specific rules already applied
 Push the new configuration to Mixer for a specific service.
 
 ```
-  istioctl mixer rule create helloworld-service.default.svc.cluster.local helloworld-service.default.svc.cluster.local -f telemetry_rule.yaml
-  istioctl mixer rule create helloworld-ui.default.svc.cluster.local helloworld-ui.default.svc.cluster.local -f telemetry_rule.yaml
+  istioctl mixer rule create helloworld-service.default.svc.cluster.local \
+  helloworld-service.default.svc.cluster.local -f telemetry_rule.yaml
+  istioctl mixer rule create helloworld-ui.default.svc.cluster.local \ 
+  helloworld-ui.default.svc.cluster.local -f telemetry_rule.yaml
 ```
 
 If the service had service-specific rules you would want to add them to the telemetry rules.
@@ -50,7 +52,8 @@ But...that’s tedious to do for every service in your mesh. Instead, let’s ap
 We can also see the logs Mixer creates for our services:
 
 ```
-  kubectl logs $(kubectl get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') | grep \"combined_log\"
+  kubectl logs $(kubectl get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') \
+  | grep \"combined_log\"
 ```
 
 #### Rate Limiting with Mixer
@@ -58,7 +61,8 @@ We can also see the logs Mixer creates for our services:
 Then apply a 1 request per second rate limit from the UI to the helloworld-service
 
 ```
-    istioctl mixer rule create global helloworld-service.default.svc.cluster.local -f rate-limit-ui-service.yaml
+    istioctl mixer rule create global helloworld-service.default.svc.cluster.local -f \
+    rate-limit-ui-service.yaml
 ```
 
 Then we can drive traffic to the UI to see the rate limit in action:
