@@ -53,6 +53,8 @@ Istio is deployed in a separate Kubernetes namespace `istio-system`  You can wat
 
 Get out of the istio directory and back to the termnial. run:
 ```
+    cd ..
+    
     git clone https://github.com/szihai/istio-workshop.git
     
     cd istio-workshop
