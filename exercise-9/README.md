@@ -4,13 +4,6 @@
 
 https://istio.io/docs/concepts/policy-and-control/mixer.html
 
-#### Setting Up Mixer for Kubernetes
-
-First we configure Mixer for a kubernetes environment, setting up the kubernetes adapter to produce attributes about the kubernetes deployment (e.g. the labels on the target and source pods).
-
-```
-    istioctl mixer rule create global global -f guestbook/mixer-kubernetes.yaml
-```
 
 #### Service Isolation Using Mixer
 
