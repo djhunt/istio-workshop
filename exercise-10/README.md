@@ -2,6 +2,7 @@
 
 #### Instal Istio Monitoring and Metrics Tools
 
+First let's switch to the directory of istio installation. The run:
 ```
     kubectl apply -f install/kubernetes/addons/prometheus.yaml
     kubectl apply -f install/kubernetes/addons/grafana.yaml
@@ -19,6 +20,7 @@ Validate that the selected service has no service-specific rules already applied
 ```
 
 Push the new configuration to Mixer for a specific service.
+Now switch back to the lab directory. Then run:
 
 ```
   istioctl mixer rule create helloworld-service.default.svc.cluster.local \
