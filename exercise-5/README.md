@@ -1,13 +1,5 @@
 ## Exercise 5 - Installing Istio
 
-#### Clean up
-
-Start with a clean slate and delete all deployed services from the cluster:
-
-```
-    kubectl delete all
-```
-
 #### Download Istio
 
 Either download it directly or get the latest using curl:
