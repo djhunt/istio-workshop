@@ -17,8 +17,7 @@ Block Access to the hello world service by adding the mixer-rule-denial.yaml rul
 ```
 
 ```
-    istioctl mixer rule create global helloworld-service.default.svc.cluster.local -f \
-    guestbook/mixer-rule-denial.yaml
+    istioctl create -f guestbook/mixer-rule-denial.yaml
 ```
 
 #### Block Access to v2 of the hello world service
@@ -31,14 +30,14 @@ Block Access to the hello world service by adding the mixer-rule-denial.yaml rul
 ```
 
 ```
-    istioctl mixer rule create global helloworld-service.default.svc.cluster.local -f \
-    mixer-rule-denial-v2.yaml
+    istioctl create -f guestbook/mixer-rule-denial-v2.yaml
 ```
 
 Then we clean up the rules to get everything working again:
 
 ```
-  istioctl mixer rule delete global helloworld-service.default.svc.cluster.local
+  istioctl delete -f guestbook/mixer-rule-denial.yaml
+  istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
 ```
 
 #### [Continue to Exercise 10 - Telemetry and Rate Limiting with Mixer](../exercise-10/README.md)
