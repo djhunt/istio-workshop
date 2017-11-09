@@ -17,11 +17,13 @@ This ingress rule forces v1 of the service by giving it a weight of 100.
 ```
 $ curl 35.188.171.180/echo/universe  
 
-{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
+{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
+"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
 
 $ curl 35.188.171.180/echo/universe
 
-{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
+{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
+"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
 
 ```
 
@@ -56,11 +58,13 @@ Now when you curl the end point set the user agent to be mobile and you should o
 ```
 $ curl http://104.198.198.111/echo/universe -A mobile
 
-{"greeting":{"hostname":"helloworld-service-v2-3297856697-6m4bp","greeting":"Hello dog2 from helloworld-service-v2-3297856697-6m4bp with 2.0","version":"2.0"}
+{"greeting":{"hostname":"helloworld-service-v2-3297856697-6m4bp","greeting":\
+"Hello dog2 from helloworld-service-v2-3297856697-6m4bp with 2.0","version":"2.0"}
 
 $ curl 35.188.171.180/echo/universe
 
-{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
+{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
+"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
 
 ```
 
