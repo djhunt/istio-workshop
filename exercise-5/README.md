@@ -62,6 +62,10 @@ Istio is deployed in a separate Kubernetes namespace `istio-system`  You can wat
 Get out of the istio directory and back to the termnial. run:
 ```
     git clone https://github.com/szihai/istio-workshop.git
+    
+    cd istio-workshop
 ```
+This is the working directory for the lab
+
 
 #### [Continue to Exercise 6 - Creating a Service Mesh with Istio Proxy](../exercise-6/README.md)
