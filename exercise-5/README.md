@@ -57,5 +57,11 @@ Istio is deployed in a separate Kubernetes namespace `istio-system`  You can wat
   kubectl get po --all-namespaces
   kubectl get svc --all-namespaces
 ```
+### clone this repo
+
+Get out of the istio directory and back to the termnial. run:
+```
+    git clone https://github.com/szihai/istio-workshop.git
+```
 
 #### [Continue to Exercise 6 - Creating a Service Mesh with Istio Proxy](../exercise-6/README.md)
