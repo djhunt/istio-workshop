@@ -10,14 +10,48 @@ https://istio.io/docs/concepts/policy-and-control/mixer.html
 Block Access to the hello world service by adding the mixer-rule-denial.yaml rule shown below:
 
 ```
-  rules:
-    - selector: source.labels["app"]=="helloworld-ui"
-      aspects:
-      - kind: denials
+  apiVersion: "config.istio.io/v1alpha2"
+  kind: denier
+  metadata:
+    name: denyall
+    namespace: istio-system
+  spec:
+    status:
+      code: 7
+      message: Not allowed
+  ---
+  apiVersion: "config.istio.io/v1alpha2"
+  kind: checknothing
+  metadata:
+    name: denyrequest
+    namespace: istio-system
+  spec:
+
+  ---
+  apiVersion: "config.istio.io/v1alpha2"
+  kind: rule
+  metadata:
+    name: mixerdenysome
+    namespace: istio-system
+  spec:
+    match: source.labels["app"]=="guestbook-ui"
+    actions:
+    # handler and instance names default to the rule's namespace.
+    - handler: denyall.denier
+      instances: [ denyrequest.checknothing.istio-system ]
 ```
 
 ```
     istioctl create -f guestbook/mixer-rule-denial.yaml
+```
+Now run the curl again:
+```
+curl http://169.47.103.138/echo/universe
+```
+
+The reuslt will be different:
+```
+{"greeting":{"greeting":"Unable to connect"},"allMessages":[{"message":"Guestbook Service is currenctly unavailable","username":"system"}]}
 ```
 
 #### Block Access to v2 of the hello world service
