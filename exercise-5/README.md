@@ -36,6 +36,7 @@ Take the output to the next command
 Change to the Istio directory (istio-0.2.12) and and install istio in the kubernetes cluster
 
 ```
+    cd ..
     cd istio-0.2.12
     kubectl apply -f install/kubernetes/istio.yaml
 ```
@@ -49,17 +50,5 @@ Istio is deployed in a separate Kubernetes namespace `istio-system`  You can wat
   kubectl get po --all-namespaces
   kubectl get svc --all-namespaces
 ```
-### clone this repo
-
-Get out of the istio directory and back to the termnial. run:
-```
-    cd ..
-    
-    git clone https://github.com/szihai/istio-workshop.git
-    
-    cd istio-workshop
-```
-This is the working directory for the lab
-
 
 #### [Continue to Exercise 6 - Creating a Service Mesh with Istio Proxy](../exercise-6/README.md)
