@@ -17,7 +17,7 @@ Istio sidecars can also be automatically injected into a Pod before deployment u
 To see how the deployment yaml is modified run the following command:
 
 ```
-    cd ..
+    cd ../istio-workshop
     istioctl kube-inject -f guestbook/helloworld-deployment.yaml
 ```
 
