@@ -8,9 +8,11 @@
 
 `kubectl get pods`
 
->NAME                           READY     STATUS    RESTARTS    AGE
+```NAME                           READY     STATUS    RESTARTS    AGE
 
->helloworld-service-v1-....     1/1       Running   0           20s
+helloworld-service-v1-....     1/1       Running   0           20s
+```
+It will take a couple minutes for the pods to be ready.
 
 2 -  Note the name of the pod above for use in the command below.  Then delete one of the hello world pods.
 
