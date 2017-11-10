@@ -40,6 +40,7 @@ Block Access to the hello world service by adding the mixer-rule-denial.yaml rul
     - handler: denyall.denier
       instances: [ denyrequest.checknothing.istio-system ]
 ```
+To apply this policy, run:
 
 ```
     istioctl create -f guestbook/mixer-rule-denial.yaml
