@@ -1,5 +1,15 @@
 ## Exercise 2 - Deploying a microservice to Kubernetes
 
+### clone the lab repo
+From a terminal, run
+```    
+    git clone https://github.com/szihai/istio-workshop.git
+    
+    cd istio-workshop
+```
+This is the working directory for the lab
+
+
 #### Deploy Hello World
 
 1 - Deploy hello world service to kubernetes
