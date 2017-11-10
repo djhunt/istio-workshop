@@ -11,6 +11,12 @@ In Kubernetes, you can instruct the underlying infrastructure to create an exter
 `kubectl get services`
 
 The external ip will start as pending.  After a short period the EXTERNAL IP will be populated.   This is the external IP of the Load Balancer.   
+The result is somewhat like this:
+```
+    NAME                 CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+helloworld-service       172.21.48.166   169.47.103.138   8080:32678/TCP   1m
+
+```
 
 #### Curl the external ip to test the helloworld service:
 
