@@ -52,7 +52,12 @@ curl http://169.47.103.138/echo/universe
 
 The reuslt will be different:
 ```
-{"greeting":{"greeting":"Unable to connect"},"allMessages":[{"message":"Guestbook Service is currenctly unavailable","username":"system"}]}
+ {"greeting":{"greeting":"Unable to connect"},"allMessages":[{"message":"Guestbook Service is currenctly   
+ unavailable","username":"system"}]}
+```
+Before we move to the next step, be sure to clear up this policy:
+```
+istioctl delete -f guestbook/mixer-rule-denial.yaml
 ```
 
 #### Block Access to v2 of the hello world service
