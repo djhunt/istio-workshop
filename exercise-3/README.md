@@ -20,7 +20,7 @@ helloworld-service       172.21.48.166   169.47.103.138   8080:32678/TCP   1m
 
 #### Curl the external ip to test the helloworld service:
 
-`curl 104.154.120.67:8080/hello/world`
+`curl 169.47.103.138:8080/hello/world`
 
 #### Explanation
 #### By Ray Tsang [@saturnism](https://twitter.com/saturnism)
