@@ -42,7 +42,7 @@ If you login into another container you can access the helloworldservice via the
 ```
 kubectl run curl --image=tutum/curl -i --tty
 
-root@busybox:/data# wget -qO- http://helloworld-service:8080/hello/Batman
+root@busybox:/data# curl http://helloworld-service:8080/hello/Batman
 {"greeting":"Hello Batman from helloworld-service-... with 1.0","hostname":"helloworld-service-...","version":"1.0"}
 
 root@busybox:/data# exit
