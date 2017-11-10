@@ -46,29 +46,27 @@ Note for windows -  You will need to manually run each command from that file an
 2 - Find the public IP and port of the Guest Book UI by running describe on the service and look for EXTERNAL-IP in the output (it will take several minutes to be assigned, so give it a minute or two):
 
 ```
-    bx cs workers <your-cluster-name>
-    
     kubectl get svc guestbook-ui
 ```
-Record the <b>Public-IP</b> field of the first command. In the second command, you shall see output like `80:32756/TCP`. The port 32756 in this example is the host port.
+Record the <b>Public-IP</b> field of the command. Note the port is 80 so we don't need to specify it.
 
-3 - Access the guestbook via the Guest Book EXTERNAL-IP address by navigating the browser to http://EXTERNAL-IP:HOSTPORT/.
+3 - Access the guestbook via the Guest Book EXTERNAL-IP address by navigating the browser to http://EXTERNAL-IP/.
 
 4 - The Guest Book UI also has a rest endpoint that can be used for testing routing rules.  It takes the last part of the URL as the name to create a greeting for.  Verify it works by running:
 
 ```
-    curl http://EXTERNAL-IP:HOSTPORT/echo/universe
+    curl http://EXTERNAL-IP/echo/universe
 ```
 
 5 - Try curling the echo endpoint multiple times and notice how it round robins between v1 and v2 of the hello world service:
 
 ```
-  $ curl http://184.172.229.14:32756/echo/universe
+  $ curl http://184.172.229.14/echo/universe
 
   {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
   "Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},
 
-  $ curl http://184.172.229.14:32756/echo/universe
+  $ curl http://184.172.229.14/echo/universe
 
   {"greeting":{"hostname":"helloworld-service-v2-1009285752-n2tpb","greeting":\
   "Hello universe from helloworld-service-v2-1009285752-n2tpb with 2.0","version":"2.0"}
