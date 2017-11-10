@@ -7,7 +7,7 @@ https://istio.io/docs/concepts/policy-and-control/mixer.html
 
 #### Service Isolation Using Mixer
 
-Block Access to the hello world service by adding the mixer-rule-denial.yaml rule shown below:
+Block Access to the guestbook backend service by adding the mixer-rule-denial.yaml rule shown below:
 
 ```
   apiVersion: "config.istio.io/v1alpha2"
@@ -63,20 +63,55 @@ istioctl delete -f guestbook/mixer-rule-denial.yaml
 #### Block Access to v2 of the hello world service
 
 ```
-    rules:
-      - selector: destination.labels["app"]=="helloworld-ui" && source.labels["version"] == "v2"
-        aspects:
-        - kind: denials
-```
+  apiVersion: "config.istio.io/v1alpha2"
+  kind: denier
+  metadata:
+    name: denyall
+    namespace: istio-system
+  spec:
+    status:
+      code: 7
+      message: Not allowed
+  ---
+  apiVersion: "config.istio.io/v1alpha2"
+  kind: checknothing
+  metadata:
+    name: denyrequest
+    namespace: istio-system
+  spec:
 
+  ---
+  apiVersion: "config.istio.io/v1alpha2"
+  kind: rule
+  metadata:
+    name: mixerdenysome
+    namespace: istio-system
+  spec:
+    match: destination.labels["app"]=="helloworld-service" && destination.labels["version"] == "2.0"
+    actions:
+    # handler and instance names default to the rule's namespace.
+    - handler: denyall.denier
+      instances: [ denyrequest.checknothing.istio-system ]
+
+```
+To apply the policy, run:
 ```
     istioctl create -f guestbook/mixer-rule-denial-v2.yaml
 ```
+Let's verify the result:
+```
+curl http://169.47.103.138/hello/world
+{"hostname":"helloworld-service-v1-5c95ddd467-txgld","greeting":"Hello world from helloworld-service-v1-5c95ddd467-txgld 
+with 1.0","version":"1.0"}
 
-Then we clean up the rules to get everything working again:
+curl http://169.47.103.138/hello/world
+PERMISSION_DENIED:denyall.denier.istio-system:Not allowed
+```
+Note: only version "2.0" is blocked while verison "1.0" works fine. Also the denial message is different from before. This is because in this case we directly blocked the helloworld service and the client gets the denial message from mixer. In the previous example, we blocked the backend service to guestbook-ui service, which returned an elegant response.
+
+Again, we clean up the policy to get everything working again:
 
 ```
-  istioctl delete -f guestbook/mixer-rule-denial.yaml
   istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
 ```
 
