@@ -27,7 +27,7 @@ helloworld-service       172.21.48.166   169.47.103.138   8080:32678/TCP   1m
 
 Open the [helloworldservice-service.yaml](helloworldservice-service.yaml) to examine the service descriptor. The important part about this file is the selector section. This is how a service knows which pod to route the traffic to, by matching the selector labels with the labels of the pods.
 
-The other important part to notice in this file is the type of service is a Load Balancer.  This tells GCE that an externally facing load balancer should be created for this service so that it is accessible from the outside.
+The other important part to notice in this file is the type of service is a Load Balancer.  This tells Bluemix that an externally facing load balancer should be created for this service so that it is accessible from the outside.
 
 Since we are running two instances of the Hello World Service (one instance in one pod), and that the IP addresses are not only unique, but also ephemeral - how will a client reach our services? We need a way to discover the service.
 
