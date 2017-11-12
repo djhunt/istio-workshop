@@ -2,12 +2,13 @@
 
 #### Instal Istio Monitoring and Metrics Tools
 
-First let's switch to the directory of istio installation. The run:
+Switch to the Istio installation directory to install the addons:
+
 ```
-    kubectl apply -f install/kubernetes/addons/prometheus.yaml
-    kubectl apply -f install/kubernetes/addons/grafana.yaml
-    kubectl apply -f install/kubernetes/addons/servicegraph.yaml
-    kubectl apply -f install/kubernetes/addons/zipkin.yaml
+    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/prometheus.yaml
+    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/grafana.yaml
+    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/servicegraph.yaml
+    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/zipkin.yaml
 ```
 
 #### Adding Telemetry Rules
