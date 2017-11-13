@@ -34,16 +34,19 @@ Now you can generate traffic by doing the curl several times:
 Browse to the Grafana dashboard:
 
 http://localhost:9090/graph
-You should see the ![dashboard](). 
-On the top most query box, enter the query `request_count`, you should see something like ![this]().
+
+You should see the dashboard ![dashboard](images/ui.png)
+On the top most query box, enter the query `request_count`, you should see something like this:
+![this](images/query.png)
 
 From the terminal, run:
 ```
-kubectl -n istio-system logs $(kubectl -n istio-system get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') mixer | grep \"instance\":\"newlog.logentry.istio-system\"
+kubectl -n istio-system logs $(kubectl -n istio-system get pods -l istio=mixer -o \
+jsonpath='{.items[0].metadata.name}') mixer | grep \"instance\":\"newlog.logentry.istio-system\"
 
 ```
-This will search through the logs for the Mixer pod. The expected output is something like
-![this]()
+This will search through the logs for the Mixer pod. The expected output is something like this:
+![this](images/log.png)
 
 
 #### Rate Limiting with Mixer
