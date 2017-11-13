@@ -10,55 +10,41 @@ Switch to the Istio installation directory to install the addons:
     kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/servicegraph.yaml
     kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/zipkin.yaml
 ```
+Verify that the service is running in your cluster.
+`kubectl -n istio-system get svc`   
 
 #### Adding Telemetry Rules
 
-Validate that the selected service has no service-specific rules already applied.
+Make sure you are in the lab directory. Then run:
 
+```  
+  istioctl create -f telemetry_rule.yaml
 ```
-  istioctl mixer rule get helloworld-ui.default.svc.cluster.local helloworld-ui.default.svc.cluster.local
-  Error: the server could not find the requested resource
-```
+### Verify that the new metric values are being generated and collected.
 
-Push the new configuration to Mixer for a specific service.
-Now switch back to the lab directory. Then run:
-
+In a Kubernetes environment, setup port-forwarding for Prometheus by executing the following command:
 ```
-  istioctl mixer rule create helloworld-service.default.svc.cluster.local \
-  helloworld-service.default.svc.cluster.local -f telemetry_rule.yaml
-  
-  istioctl mixer rule create helloworld-ui.default.svc.cluster.local \ 
-  helloworld-ui.default.svc.cluster.local -f telemetry_rule.yaml
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090 &   
+```
+Now you can generate traffic by doing the curl several times:
+```
+    curl http://169.47.103.138/echo/universe
 ```
 
-If the service had service-specific rules you would want to add them to the telemetry rules.
+Browse to the Grafana dashboard:
 
-Send traffic to that hello world ui service by either going to the web page or using the curl command.  Refresh the page several times or issue the curl command a few times to generate traffic.
+http://localhost:9090/graph
+You should see the ![dashboard](). 
+On the top most query box, enter the query `request_count`, you should see something like ![this]().
+
+From the terminal, run:
+```
+kubectl -n istio-system logs $(kubectl -n istio-system get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') mixer | grep \"instance\":\"newlog.logentry.istio-system\"
 
 ```
-    watch curl http://104.198.198.111/echo/dog2 -A mobile
-```
+This will search through the logs for the Mixer pod. The expected output is something like
+![this]()
 
-Verify that the new metric is being collected.  Browse to the Grafana dashboard by viewing the kubernetes services and finding the external IP.  The browse to:
-
-http://104.197.73.207:3000/dashboard/db/istio-dashboard
-
-#### Apply Across the Service mesh
-
-But...that’s tedious to do for every service in your mesh. Instead, let’s apply our telemetry configuration to the whole mesh:
-
-```
-    istioctl create -f global_telemetry.yaml
-```
-
-(Note: we have to use a different config file because in 0.1 Mixer rules are full document writes; in 0.2 configuration is much more granular)
-
-We can also see the logs Mixer creates for our services:
-
-```
-  kubectl logs $(kubectl get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') \
-  | grep \"combined_log\"
-```
 
 #### Rate Limiting with Mixer
 
@@ -71,9 +57,8 @@ Then apply a 1 request per second rate limit from the UI to the helloworld-servi
 Then we can drive traffic to the UI to see the rate limit in action:
 
 ```
-    watch -n 0.1 curl -i <IP>:<PORT>/echo/foo
+    watch -n 0.1 curl -i <IP>:/echo/foo
 ```
 
 and in grafana we can see the 429’s.
-
-http://104.197.73.207:3000/dashboard/db/istio-dashboard
+http://localhost:9090/graph
