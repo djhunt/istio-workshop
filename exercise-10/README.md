@@ -51,8 +51,23 @@ This will search through the logs for the Mixer pod. The expected output is some
 
 #### Rate Limiting with Mixer
 
-Then apply a 1 request per second rate limit from the UI to the helloworld-service
-
+Then apply a 1 request per 60 second rate limit from the UI to the helloworld-service
+```
+spec:
+  quotas:
+  - name: requestcount.quota.istio-system
+    # default rate limit is 5000qps
+    maxAmount: 5000
+    validDuration: 1s
+    overrides:
+    # The following override applies to traffic from 'rewiews' version v2,
+    # destined for the ratings service. The destinationVersion dimension is ignored.
+    - dimensions:
+        destination: helloworld-service
+      maxAmount: 1
+      validDuration: 60s
+```
+To apply the policy, run:   
 ```
     istioctl create -f rate-limit-ui-service.yaml
 ```
@@ -60,8 +75,8 @@ Then apply a 1 request per second rate limit from the UI to the helloworld-servi
 Then we can drive traffic to the UI to see the rate limit in action:
 
 ```
-    watch -n 0.1 curl -i <IP>:/echo/foo
+   curl http://169.47.103.138/hello/world
 ```
 
-and in grafana we can see the 429’s.
+Run this a couple times and in grafana we can see the 429’s.
 http://localhost:9090/graph
