@@ -39,6 +39,9 @@ Take the output to the next command
         --clusterrole=cluster-admin \
         --user=<i><b>user</b></i>
 </pre>
+<i>Note: If you are have the cluster provisioned by IBM, simply use the email address handed over to you in the next part.</i>
+
+
 2 - Next install Istio on the Kubernetes cluster:
 
 Change to the Istio directory (istio-0.2.12) and and install istio in the kubernetes cluster
