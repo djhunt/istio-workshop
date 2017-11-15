@@ -4,13 +4,33 @@
 
 1 - Scaling the number of replicas of our Hello World service is as simple as running :
 
-`kubectl get deployment`
-
-`kubectl scale deployment helloworld-service-v1 --replicas=4`
-
-`kubectl get deployment`
-
-`kubectl get pods`
+```sh
+kubectl get deployment
+ 
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+helloworld-service-v1   1         1         1            1           1m
+```
+ 
+```sh
+kubectl scale deployment helloworld-service-v1 --replicas=4
+```
+ 
+```sh
+kubectl get deployment
+ 
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+helloworld-service-v1   4         4         4            4           1m
+```
+ 
+```sh
+kubectl get pods
+ 
+NAME                          READY     STATUS    RESTARTS   AGE
+helloworld-service-v1-...    1/1       Running   0          1m
+helloworld-service-v1-...    1/1       Running   0          1m
+helloworld-service-v1-...    1/1       Running   0          1m
+helloworld-service-v1-...    1/1       Running   0          2m
+```
 
 2 - Scale out even more
 
