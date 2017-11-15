@@ -1,100 +1,62 @@
-## Exercise 8 - Request Routing and Canary Deployments
+## Exercise 8 - Telemetry
 
-Because there are 2 version of the HelloWorld Service Deployment (v1 and v2), before modifying any of the routes a default route needs to be set to just V1.  Otherwise it will just round robin between V1 and V2
+First we need to configure Istio to automatically gather telemetry data for services running in the mesh.
 
-#### Configure the default route for hello world service
+#### Create a Rule to Collect Telemetry Data
 
-1 - Set the default version for all requests to the hello world service using :
-
+```sh
+istioctl create -f guestbook/guestbook-telemetry.yaml
 ```
-istioctl create -f guestbook/route-rule-force-hello-v1.yaml
-```
+#### View Guestbook Telemetry data
 
-This ingress rule forces v1 of the service by giving it a weight of 100.
+Generate a small load to the application:
 
-2 - Now when you curl the echo service it should always return V1 of the hello world service:
-
-```
-$ curl http://184.172.229.14:32756/echo/universe  
-
-{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
-"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
-
-$ curl http://184.172.229.14:32756/echo/universe
-
-{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
-"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
-
+```sh
+while sleep 0.5; do curl http://$INGRESS_IP/hello/world; done
 ```
 
-#### Canary Deployments
-
-Currently the routing rule routes only to V1 of the hello world service which is not real useful. What we want to do next is a canary deployment and push some of the traffic to V2. This can be done by creating another rule with a higher precedence that routes some of the traffic to V2 based on http headers.  As an example we will use the following canary deployment in canary-helloworld.yaml  This rule routes all traffic from a mobile user agent to version 2.0 of the service.
-
-```
-    destination:
-      name: helloworld-service
-    match:
-      request:
-        headers:
-          user-agent:
-            exact: mobile
-    precedence: 2
-    route:
-      - labels:
-          version: "2.0"
+### Grafana
+Establish port forward from local port 3000 to the Grafana instance:
+```sh
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana \
+  -o jsonpath='{.items[0].metadata.name}') 3000:3000
 ```
 
-Note that rules with a higher precedence number are applied first.  If a precedence is not specified then it defaults to 0.  So with these 2 rules in place the one with precedence 2 will be applied first.
+Browse to http://localhost:3000 and navigate to Istio Dashboard
 
-Test this out by creating the rule:
-
-```
-    istioctl create -f guestbook/route-rule-canary.yaml
-```
-
-Now when you curl the end point set the user agent to be mobile and you should only see V2:
-
-```
-$ curl http://184.172.229.14:32756/echo/universe -A mobile
-
-{"greeting":{"hostname":"helloworld-service-v2-3297856697-6m4bp","greeting":\
-"Hello dog2 from helloworld-service-v2-3297856697-6m4bp with 2.0","version":"2.0"}
-
-$ curl http://184.172.229.14:32756/echo/universe
-
-{"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":\
-"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
-
+### Zipkin
+Establish port forward from local port
+```sh
+kubectl port-forward -n istio-system \
+  $(kubectl get pod -n istio-system -l app=zipkin -o jsonpath='{.items[0].metadata.name}') \
+  9411:9411
 ```
 
-An important point to note is that the user-agent http header is propagated in the span baggage.  Look at these two classes for details:
+Browse to http://localhost:9411
 
-https://github.com/retroryan/istio-by-example-java/blob/master/spring-boot-example/spring-istio-support/src/main/java/com/example/istio/IstioHttpSpanInjector.java
-
-https://github.com/retroryan/istio-by-example-java/blob/master/spring-boot-example/spring-istio-support/src/main/java/com/example/istio/IstioHttpSpanExtractor.java
-
-#### Optional - Route based on the browser
-
-It is also possible to route it based on the Web Browser.  For example the following routes to version 2.0 if the browser is chrome:
-
-```
-  match:
-    request:
-      headers:
-        user-agent:
-          regex: ".*Chrome.*"
-  route:
-  - labels:
-      version: "2.0"
+### Prometheus
+```sh
+kubectl -n istio-system port-forward \
+  $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') \
+  9090:9090
 ```
 
-To apply this route run:
+Browse to http://localhost:9090/graph and in the “Expression” input box enter: `request_count`. Click the Execute button.
 
+
+### Service Graph
+```sh
+kubectl -n istio-system port-forward \
+  $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') \
+  8088:8088
 ```
-    istioctl create -f guestbook/route-rule-user-agent-chrome.yaml
+
+Browse to http://localhost:8088/dotviz
+
+#### Mixer Log Stream
+
+```sh
+kubectl -n istio-system logs $(kubectl -n istio-system get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') mixer | grep \"instance\":\"newlog.logentry.istio-system\"
 ```
 
-Then navigate to the home page in chrome and another browser.
-
-#### [Continue to Exercise 9 - Fault Injection](../exercise-9/README.md)
+#### [Continue to Exercise 9 - Request Routing and Canary Deployments](../exercise-9/README.md)
