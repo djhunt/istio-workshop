@@ -1,82 +1,77 @@
-## Exercise 10 - Telemetry and Rate Limiting with Mixer
+## Exercise 10 - Fault Injection and Rate Limiting
 
-#### Instal Istio Monitoring and Metrics Tools
+#### Overview of Istio Mixer
 
-Switch to the Istio installation directory to install the addons:
+See the overview of Mixer at [istio.io](https://istio.io/docs/concepts/policy-and-control/mixer.html).
 
-```
-    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/prometheus.yaml
-    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/grafana.yaml
-    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/servicegraph.yaml
-    kubectl apply -f ../istio-0.2.12/install/kubernetes/addons/zipkin.yaml
-```
-Verify that the service is running in your cluster.
-`kubectl -n istio-system get svc`   
+#### Service Isolation Using Mixer
 
-#### Adding Telemetry Rules
+We'll block access to the Hello World service by adding the mixer-rule-denial.yaml rule shown below:
 
-Make sure you are in the lab directory. Then run:
-
-```  
-  istioctl create -f telemetry_rule.yaml
-```
-### Verify that the new metric values are being generated and collected.
-
-In a Kubernetes environment, setup port-forwarding for Prometheus by executing the following command:
-```
-kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090 &   
-```
-Now you can generate traffic by doing the curl several times:
-```
-    curl http://169.47.103.138/echo/universe
-```
-
-Browse to the Grafana dashboard:
-
-http://localhost:9090/graph
-
-You should see the dashboard ![dashboard](images/ui.png)
-On the top most query box, enter the query `request_count`, you should see something like this:
-![this](images/query.png)
-
-From the terminal, run:
-```
-kubectl -n istio-system logs $(kubectl -n istio-system get pods -l istio=mixer -o \
-jsonpath='{.items[0].metadata.name}') mixer | grep \"instance\":\"newlog.logentry.istio-system\"
-
-```
-This will search through the logs for the Mixer pod. The expected output is something like this:
-![this](images/log.png)
-
-
-#### Rate Limiting with Mixer
-
-Then apply a 1 request per 60 second rate limit from the UI to the helloworld-service
-```
+```yaml
+# Create a denier that returns a google.rpc.Code 7 (PERMISSION_DENIED)
+apiVersion: "config.istio.io/v1alpha2"
+kind: denier
+metadata:
+  name: denyall
+  namespace: istio-system
 spec:
-  quotas:
-  - name: requestcount.quota.istio-system
-    # default rate limit is 5000qps
-    maxAmount: 5000
-    validDuration: 1s
-    overrides:
-    # The following override applies to traffic from 'rewiews' version v2,
-    # destined for the ratings service. The destinationVersion dimension is ignored.
-    - dimensions:
-        destination: helloworld-service
-      maxAmount: 1
-      validDuration: 60s
-```
-To apply the policy, run:   
-```
-    istioctl create -f rate-limit-ui-service.yaml
+  status:
+    code: 7
+    message: Not allowed
+---
+# The (empty) data handed to denyall at run time
+apiVersion: "config.istio.io/v1alpha2"
+kind: checknothing
+metadata:
+  name: denyrequest
+  namespace: istio-system
+spec:
+---
+# The rule that uses denier to deny requests with source.labels["app"] == "helloworld-ui"
+apiVersion: "config.istio.io/v1alpha2"
+kind: rule
+metadata:
+  name: deny-hello-world
+  namespace: istio-system
+spec:
+  match: source.labels["app"]=="helloworld-ui"
+  actions:
+  - handler: denyall.denier
+    instances:
+    - denyrequest.checknothing
 ```
 
-Then we can drive traffic to the UI to see the rate limit in action:
-
-```
-   curl http://169.47.103.138/hello/world
+```sh
+istioctl create -f guestbook/mixer-rule-denial.yaml
 ```
 
-Run this a couple times and in grafana we can see the 429’s.
-http://localhost:9090/graph
+#### Block Access to v2 of the hello world service
+
+```yaml
+# Rule that re-uses denier to deny requests to version two of the hello world UI
+apiVersion: "config.istio.io/v1alpha2"
+kind: rule
+metadata:
+  name: deny-hello-world-v2
+  namespace: istio-system
+spec:
+  match: source.labels["app"]=="helloworld-ui" && source.labels["version"] == "v2"
+  actions:
+  - handler: denyall.denier
+    instances:
+    - denyrequest.checknothing
+```
+
+```sh
+istioctl create -f guestbook/mixer-rule-denial-v2.yaml
+```
+
+Then we clean up the rules to get everything working again:
+
+```sh
+istioctl delete -f guestbook/mixer-rule-denial.yaml
+istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
+```
+
+#### [Continue to Exercise 11 - Security](../exercise-11/README.md)
