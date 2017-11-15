@@ -48,6 +48,14 @@ Change to the Istio directory (istio-0.2.12) and and install istio in the kubern
     cd istio-0.2.12
     kubectl apply -f install/kubernetes/istio.yaml
 ```
+####  Install Add-ons for Grafana, Prometheus, and Zipkin:
+
+```sh
+kubectl apply -f istio-0.2.12/install/kubernetes/addons/zipkin.yaml
+kubectl apply -f istio-0.2.12/install/kubernetes/addons/grafana.yaml
+kubectl apply -f istio-0.2.12/install/kubernetes/addons/prometheus.yaml
+kubectl apply -f istio-0.2.12/install/kubernetes/addons/servicegraph.yaml
+```
 
 
 #### Viewing the Istio Deployments
