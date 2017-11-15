@@ -33,7 +33,7 @@ Istio related commands need to have `istioctl` in the path.  Verify it is availa
 ``` 
     bx account users
 ```
-Take the output to the next command
+Take the output to the next command    
 <i>Note: If you are have the cluster provisioned by IBM, simply use the email address handed over to you in the next part.</i>
 
 <pre>
