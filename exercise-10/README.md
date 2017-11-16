@@ -35,7 +35,7 @@ metadata:
   name: deny-hello-world
   namespace: istio-system
 spec:
-  match: source.labels["app"]=="helloworld-ui"
+  match: destination.service=="helloworld-service"
   actions:
   - handler: denyall.denier
     instances:
