@@ -28,14 +28,14 @@ metadata:
   namespace: istio-system
 spec:
 ---
-# The rule that uses denier to deny requests with source.labels["app"] == "helloworld-ui"
+# The rule that uses denier to deny requests to the helloworld service
 apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
   name: deny-hello-world
   namespace: istio-system
 spec:
-  match: destination.service=="helloworld-service"
+  match: destination.service=="helloworld-service.default.svc.cluster.local"
   actions:
   - handler: denyall.denier
     instances:
@@ -46,17 +46,22 @@ spec:
 istioctl create -f guestbook/mixer-rule-denial.yaml
 ```
 
+Verify that access is now denied:
+```sh
+curl http://$INGRESS_IP/hello/world
+```
+
 #### Block Access to v2 of the hello world service
 
 ```yaml
-# Rule that re-uses denier to deny requests to version two of the hello world UI
+# The rule that uses denier to deny requests to version 2.0 of the helloworld service
 apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
-  name: deny-hello-world-v2
+  name: deny-hello-world
   namespace: istio-system
 spec:
-  match: source.labels["app"]=="helloworld-ui" && source.labels["version"] == "v2"
+  match: destination.service=="helloworld-service.default.svc.cluster.local" && destination.labels["version"] == "2.0"
   actions:
   - handler: denyall.denier
     instances:
@@ -64,13 +69,23 @@ spec:
 ```
 
 ```sh
+istioctl delete -f guestbook/mixer-rule-denial.yaml
 istioctl create -f guestbook/mixer-rule-denial-v2.yaml
 ```
 
-Then we clean up the rules to get everything working again:
+Check that you can access the v1 service:
+```sh
+curl http://$INGRESS_IP/hello/world
+```
+
+But you should not be able to access v2:
+```sh
+curl http://$INGRESS_IP/hello/world -A mobile
+```
+
+Clean up the rule:
 
 ```sh
-istioctl delete -f guestbook/mixer-rule-denial.yaml
 istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
 ```
 
