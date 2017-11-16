@@ -76,7 +76,7 @@ kubectl apply -f guestbook/guestbook-deployment.yaml -f guestbook/guestbook-serv
 
 WAIT FOR GUESTBOOK TO BE RUNNING!!  (Hint: `kubectl get -w deployment`)
 
-3 - Deploy the Guide Book UI:
+3 - Deploy the Guest Book UI:
 
 ```sh
 kubectl apply -f guestbook/guestbook-ui-deployment.yaml -f guestbook/guestbook-ui-service.yaml
