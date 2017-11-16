@@ -40,7 +40,6 @@ It will take a couple minutes for the pods to be ready.
 
 `kubectl logs helloworld-service-v1-...`
 
-`kubectl logs -f helloworld-service-v1-...``
 
 ## Explanation
 
