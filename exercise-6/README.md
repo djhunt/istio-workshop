@@ -51,7 +51,7 @@ For demonstrating Istio we’re going to use [this guestbook example](https://gi
 
 * Guestbook Service - A service that keeps a registry of guests and the message they left.
 
-* Hello World UI - The front end to the application that calls to the other microservices to get the list of guests, register a new guest and get the greeting for the user when they register.
+* Guestbook UI - The front end to the application that calls to the other microservices to get the list of guests, register a new guest and get the greeting for the user when they register.
 
 It requires MySQL to store guestbook entries, and Redis to store session information.   
 
