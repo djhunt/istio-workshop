@@ -89,4 +89,3 @@ Clean up the rule:
 istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
 ```
 
-#### [Continue to Exercise 11 - Security](../exercise-11/README.md)
