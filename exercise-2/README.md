@@ -6,7 +6,7 @@ From your command line, run:
 ```    
     git clone https://github.com/szihai/istio-workshop.git
     
-    cd istio-workshop
+    cd [path_to_istio-workshop]
 ```
 This is the working directory for the lab.
 
@@ -17,18 +17,19 @@ This is the working directory for the lab.
 
     `kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record`
 
+2. Verify that the service was created. It will take a couple minutes for the pods to be ready.
+    
     `kubectl get pods`
 
     ```NAME                           READY     STATUS    RESTARTS    AGE
     helloworld-service-v1-....        1/1       Running   0           20s
     ```
-    It will take a couple minutes for the pods to be ready.
 
-2. Note the name of the pod above for use in the command below. Then delete one of the Hello World pods.
+3. Note the name of the pod above for use in the command below. Then delete one of the Hello World pods.
 
     `kubectl delete pod helloworld-service-v1-...`
 
-3. Kubernetes will automatically restart this pod for you. Verify that it restarted.
+4. Kubernetes will automatically restart this pod for you. Verify that it restarted.
 
     `kubectl get pods`
 
@@ -36,7 +37,7 @@ This is the working directory for the lab.
     helloworld-service-v1-....        1/1       Running   0           20s
     ```
 
-4. All of the container output to STDOUT and STDERR will be accessible as Kubernetes logs.
+5. All of the container output to STDOUT and STDERR will be accessible as Kubernetes logs.
 
     `kubectl logs helloworld-service-v1-...`
 
