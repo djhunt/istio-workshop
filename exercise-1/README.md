@@ -1,17 +1,17 @@
 # Exercise 1 - Setting up a Kubernetes cluster with IBM Cloud Container Service
 
 If your cluster has been provisioned for you, simply run:
-```
+    ```
     bx cs cluster-config [your_cluster_name]
     export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/wordpress/kube-config-dal10-wordpress.yml
-```
+    ```
 Otherwise, follow these steps to set up a cluster.
 
 > **Note**: The cluster will take some time to be provisioned. We recommend completing this exercise before starting the lab.
 
 1. Create a free Kubernetes cluster.
     ```bash
-    $ bx cs cluster-create --name [your_cluster_name]
+    bx cs cluster-create --name [your_cluster_name]
     ```
     A free cluster comes with one worker node to deploy container pods upon. A worker node is the compute host, typically a virtual machine, that your pods run on. A pod is a group of one or more containers, the shared storage for those containers, and the options about how to run them. The pod model is as an "application specific logical host", which means it contains one or more application containers which are relatively tightly coupled.
 
@@ -19,7 +19,8 @@ Otherwise, follow these steps to set up a cluster.
 
 2. Before you continue to the next step, verify that the deployment of your worker node is complete.
     ```bash
-    $ bx cs workers [your_cluster_name]
+    bx cs workers [your_cluster_name]
+    
     ID                                           Public IP       Private IP    Machine Type  State     Status   
     dal10-pa8dfcc5223804439c87489886dbbc9c07-w1  169.47.223.113  10.171.42.93  free          normal    Ready
     ```
@@ -28,7 +29,8 @@ Otherwise, follow these steps to set up a cluster.
 
     a. Download the configuration file and certificates for your cluster using the `cluster-config` command.
     ```bash
-    $ bx cs cluster-config [your_cluster_name]
+    bx cs cluster-config [your_cluster_name]
+    
     export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/wordpress/kube-config-dal10-wordpress.yml
     ```
 
