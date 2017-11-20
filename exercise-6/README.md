@@ -63,7 +63,7 @@ Note that the services must be started in a fixed order because they depend on o
     kubectl apply -f guestbook/helloworld-deployment-v2.yaml
     ```
 
-2. Verify that they are available before continuing. **Do not procede until these services are up and running.** 
+2. Verify that these microservices are available before continuing. **Do not procede until they are up and running.** 
 
     ```
     kubectl get -w deployment
