@@ -13,7 +13,7 @@ cd [path_to_istio-workshop]
 This is the working directory for the lab.
 
 
-### Deploy Hello World
+### Deploy the Hello World service
 
 1. Deploy the Hello World service to Kubernetes.
 
