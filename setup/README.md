@@ -5,13 +5,11 @@ Before you begin learning, you will need to install the required CLIs to create 
 
 This lab includes the information for installing these CLIs and plug-ins:
 
-``` txt
-IBM Cloud CLI version 0.5.0 or later
-IBM Cloud Container Service plug-in
-Kubernetes CLI version 1.7.4 or later
-Optional: IBM Cloud Container Registry plug-in
-Optional: Docker version 1.9 or later
-```
+* IBM Cloud CLI version 0.5.0 or later
+* IBM Cloud Container Service plug-in
+* Kubernetes CLI version 1.7.4 or later
+* Optional: IBM Cloud Container Registry plug-in
+* Optional: Docker version 1.9 or later
 
 If you have already installed these CLIs and plug-ins, you can skip this lab and proceed to [Exercise 1 - Setting up a Kubernetes cluster](exercise-1/README.md).
 
