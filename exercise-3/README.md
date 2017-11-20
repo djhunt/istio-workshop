@@ -9,13 +9,14 @@ In Kubernetes, you can instruct the underlying infrastructure to create an exter
 1. Create a LoadBalancer service for the Hello World service.
 
     ```
-    $ kubectl apply -f kubernetes/helloworldservice-service.yaml --record
+    kubectl apply -f kubernetes/helloworldservice-service.yaml --record
     ```
 
 2. Verify that Load Balancer service was created. The `EXTERNAL IP` of the LoadBalancer will start as pending and will be populated after a short period.
 
     ```bash
-    $ kubectl get services
+    kubectl get services
+    
     NAME                 CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
     helloworld-service   172.21.48.166   169.47.103.138   8080:32678/TCP   1m
     ```
@@ -25,7 +26,7 @@ In Kubernetes, you can instruct the underlying infrastructure to create an exter
 Curl the external IP address to test the Hello World service.
 
     ```
-    $ curl 169.47.103.138:8080/hello/world
+    curl 169.47.103.138:8080/hello/world
     ```
 
 #### Optional - Curl the service using a DNS name
