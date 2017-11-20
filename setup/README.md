@@ -1,6 +1,4 @@
-## Workshop Setup
-
-# Lab 0: Setting up the IBM Cloud Containers Service
+# Lab 0: Workshop Setup
 
 
 Before you begin learning, you will need to install the required CLIs to create and manage your Kubernetes clusters in IBM Cloud Container Service, and to deploy containerized apps to your cluster.
@@ -18,14 +16,14 @@ Optional: Docker version 1.9 or later
 If you have already installed these CLIs and plug-ins, you can skip this lab and proceed to [Exercise 1 - Setting up a Kubernetes cluster](exercise-1/README.md).
 
 
-# Install the IBM Cloud CLI
+## Install the IBM Cloud CLI
 
 As a prerequisite for the IBM Cloud Container Service plug-in, install the IBM Cloud command line interface, located at https://clis.ng.bluemix.net/ui/home.html. Once installed, you can access IBM Cloud from your command line with the prefix `bx`.
 
 Log in to the IBM Cloud CLI with `bx login`. Enter your IBM Cloud credentials when prompted.
     * Note: If you have a federated ID, use `bx login --sso` to log in to the IBM Cloud CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-# Install the Containers Service Plug-in
+## Install the IBM Cloud Containers Service Plug-in
 
 To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Container Service plug-in with `bx plugin install container-service -r Bluemix`. The prefix for running commands by using the IBM Cloud Container Service plug-in is `bx cs`.
 
@@ -33,7 +31,7 @@ To verify that the plug-in is installed properly, run `bx plugin list`. The IBM 
 
 Once the IBM Cloud CLI and the Containers Service plug-in are installed, you can move on to the next phase of the lab.
 
-# Install the Kubernetes CLI
+## Install the Kubernetes CLI
 
 To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, you will need to install the Kubernetes CLI. The following links will install the CLI. Simply click the link corresponding to your operating system:
 
@@ -55,7 +53,7 @@ echo $PATH
 ```
 Convert the binary file to an executable with `chmod +x /usr/local/bin/kubectl`.
 
-# Optional: Install the IBM Cloud Container Registry plug-in and Docker
+## Optional: Install the IBM Cloud Container Registry plug-in and Docker
 
 To manage a private image repository, install the IBM Cloud Container Registry plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `bx cr`.
 
