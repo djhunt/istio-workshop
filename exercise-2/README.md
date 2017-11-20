@@ -16,7 +16,9 @@ This is the working directory for the lab.
 
 1. Deploy the Hello World service to Kubernetes.
 
-    `kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record`
+   ```
+   kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record`
+   ```
 
 2. Verify that the service was created. It will take a couple minutes for the pods to be ready.
 
@@ -29,7 +31,9 @@ This is the working directory for the lab.
 
 3. Note the name of the pod above for use in the command below. Then delete one of the Hello World pods.
 
-    `kubectl delete pod helloworld-service-v1-...`
+    ```
+    kubectl delete pod helloworld-service-v1-...
+    ```
 
 4. Kubernetes will automatically restart this pod for you. Verify that it restarted.
 
@@ -42,7 +46,9 @@ This is the working directory for the lab.
 
 5. All of the container output to STDOUT and STDERR will be accessible as Kubernetes logs.
 
-    `kubectl logs helloworld-service-v1-...`
+    ```
+    kubectl logs helloworld-service-v1-...
+    ```
 
 
 ## Explanation
