@@ -8,7 +8,7 @@ This lab includes the information for installing these CLIs and plug-ins:
 ``` txt
 IBM Cloud CLI version 0.5.0 or later
 IBM Cloud Container Service plug-in
-Kubernetes CLI version 1.5.6 or later
+Kubernetes CLI version 1.7.4 or later
 Optional: IBM Cloud Container Registry plug-in
 Optional: Docker version 1.9 or later
 ```
@@ -35,9 +35,9 @@ Once the IBM Cloud CLI and the Containers Service plug-in are installed, you can
 
 To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, you will need to install the Kubernetes CLI. The following links will install the CLI. Simply click the link corresponding to your operating system:
 
-OS X: https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/darwin/amd64/kubectl
-Linux: https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl
-Windows: https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/windows/amd64/kubectl.exe
+OS X: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl
+Linux: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl
+Windows: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe
 
 If you are using Windows, install the Kubernetes CLI in the same directory as the IBM Cloud CLI. This setup saves you some filepath changes when you run commands later.
 
