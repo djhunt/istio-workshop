@@ -12,7 +12,6 @@ cd [path_to_istio-workshop]
 
 This is the working directory for the lab.
 
-
 ### Deploy the Hello World service
 
 1. Deploy the Hello World service to Kubernetes.
@@ -22,7 +21,8 @@ This is the working directory for the lab.
 2. Verify that the service was created. It will take a couple minutes for the pods to be ready.
 
     ```bash
-    $ kubectl get pods
+    kubectl get pods
+    
     NAME                           READY     STATUS    RESTARTS    AGE
     helloworld-service-v1-....     1/1       Running   0           20s
     ```
@@ -34,7 +34,8 @@ This is the working directory for the lab.
 4. Kubernetes will automatically restart this pod for you. Verify that it restarted.
 
     ```bash
-    $ kubectl get pods
+    kubectl get pods
+    
     NAME                           READY     STATUS    RESTARTS    AGE
     helloworld-service-v1-....     1/1       Running   0           20s
     ```
