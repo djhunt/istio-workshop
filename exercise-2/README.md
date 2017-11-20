@@ -4,11 +4,12 @@
 
 From your command line, run:
    
-    ```    
-    git clone https://github.com/szihai/istio-workshop.git
+```    
+git clone https://github.com/szihai/istio-workshop.git
 
-    cd [path_to_istio-workshop]
-    ```
+cd [path_to_istio-workshop]
+```
+
 This is the working directory for the lab.
 
 
