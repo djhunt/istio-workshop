@@ -1,4 +1,4 @@
-# Lab 0: Workshop Setup
+# Exercise 0: Workshop Setup
 
 
 Before you begin learning, you will need to install the required CLIs to create and manage your Kubernetes clusters in IBM Cloud Container Service, and to deploy containerized apps to your cluster.
