@@ -1,59 +1,61 @@
-## Exercise 5 - Installing Istio
+# Exercise 5 - Installing Istio
 
-#### Clean up
+### Clean up
  
-Start with a clean slate and delete all deployed services from the cluster:
- 
+Start with a clean slate by deleting all deployed services from the cluster.
+
 ```sh
 kubectl delete all --all
 ```
 
-#### Download Istio
+### Download Istio
 
-Either download it directly or get the latest using curl:
+1. Either download Istio directly from https://github.com/istio/istio/releases or get the latest version using curl:
 
-https://github.com/istio/istio/releases
+   ```
+   curl -L https://git.io/getLatestIstio | sh -
+   ```
 
-```
-curl -L https://git.io/getLatestIstio | sh -
+2. Extract the installation files.
+   
+3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
 
-export PATH=$PWD/istio-0.2.12/bin:$PATH
-```
+   ```
+   export PATH=$PWD/istio-0.2.12/bin:$PATH
+   ```
 
-#### Running istioctl
+### Install Istio on the Kubernetes cluster
 
-Istio related commands need to have `istioctl` in the path.  Verify it is available by running:
-
-`istioctl -h`
-
-
-#### Install Istio on the Kubernetes Cluster
-
-1 - First grant cluster admin permissions to the current user (admin permissions are required to create the necessary RBAC rules for Istio):
-``` 
+1. Get the IBMid for the current user.
+    
+    * If you created your own cluster, run the following command and note the returned IBMid:
+    ``` 
     bx account users
-```
-Take the output to the next command    
-<i>Note: If you are have the cluster provisioned by IBM, simply use the email address handed over to you in the next part.</i>
+    ```
 
-<pre>
+    * If the cluster was provisioned for you by IBM, use the IBMid provided to you.
+
+2. Grant cluster admin permissions to the current user. Admin permissions are required to create the necessary RBAC rules for Istio.
+
+    ```
     kubectl create clusterrolebinding cluster-admin-binding \
         --clusterrole=cluster-admin \
-        --user=<i><b>user</b></i>
-</pre>
+        --user=[IBMid]
+    ```
 
+3. Change the directory to the Istio file location.
 
+   ```
+   cd [path_to_istio-0.2.12]
+   ```
 
-2 - Next install Istio on the Kubernetes cluster:
+3. Install Istio on the Kubernetes cluster.
 
-Change to the Istio directory (istio-0.2.12) and and install istio in the kubernetes cluster
+   ```
+   kubectl apply -f install/kubernetes/istio.yaml
+   ```
 
-```
-    cd ..
-    cd istio-0.2.12
-    kubectl apply -f install/kubernetes/istio.yaml
-```
-####  Install Add-ons for Grafana, Prometheus, and Zipkin:
+### Install Add-ons for Grafana, Prometheus, and Zipkin
 
 ```sh
 kubectl apply -f install/kubernetes/addons/zipkin.yaml
@@ -62,14 +64,13 @@ kubectl apply -f install/kubernetes/addons/prometheus.yaml
 kubectl apply -f install/kubernetes/addons/servicegraph.yaml
 ```
 
+### View the Istio deployments
 
-#### Viewing the Istio Deployments
-
-Istio is deployed in a separate Kubernetes namespace `istio-system`  You can watch the state of Istio and other services and pods using the watch command.  For example in 2 separate terminal windows run:
+Istio is deployed in a separate Kubernetes namespace, `istio-system`. You can watch the state of Istio and other services and pods using the watch command.  For example in 2 separate terminal windows run:
 
 ```
-  kubectl get po --all-namespaces
-  kubectl get svc --all-namespaces
+kubectl get po --all-namespaces
+kubectl get svc --all-namespaces
 ```
 
-#### [Continue to Exercise 6 - Creating a Service Mesh with Istio Proxy](../exercise-6/README.md)
+#### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-6/README.md)
