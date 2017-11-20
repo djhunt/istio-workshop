@@ -1,44 +1,44 @@
-## Exercise 2 - Deploying a microservice to Kubernetes
+# Exercise 2 - Deploying a microservice to Kubernetes
 
-### clone the lab repo
-From a terminal, run
+### Clone the lab repo
+
+From your command line, run:
 ```    
     git clone https://github.com/szihai/istio-workshop.git
     
     cd istio-workshop
 ```
-This is the working directory for the lab
+This is the working directory for the lab.
 
 
-#### Deploy Hello World
+### Deploy Hello World
 
-1 - Deploy hello world service to kubernetes
+1. Deploy the Hello World service to Kubernetes.
 
-`kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record`
+    `kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record`
 
-`kubectl get pods`
+    `kubectl get pods`
 
-```NAME                           READY     STATUS    RESTARTS    AGE
+    ```NAME                           READY     STATUS    RESTARTS    AGE
+    helloworld-service-v1-....        1/1       Running   0           20s
+    ```
+    It will take a couple minutes for the pods to be ready.
 
-helloworld-service-v1-....     1/1       Running   0           20s
-```
-It will take a couple minutes for the pods to be ready.
+2. Note the name of the pod above for use in the command below. Then delete one of the Hello World pods.
 
-2 -  Note the name of the pod above for use in the command below.  Then delete one of the hello world pods.
+    `kubectl delete pod helloworld-service-v1-...`
 
-`kubectl delete pod helloworld-service-v1-...`
+3. Kubernetes will automatically restart this pod for you. Verify that it restarted.
 
-3 - Kubernetes will automatically restart this pod for you.  Verify it is restarted
+    `kubectl get pods`
 
-`kubectl get pods`
+    ```NAME                           READY     STATUS    RESTARTS    AGE
+    helloworld-service-v1-....        1/1       Running   0           20s
+    ```
 
->NAME                           READY     STATUS    RESTARTS   AGE
+4. All of the container output to STDOUT and STDERR will be accessible as Kubernetes logs.
 
->helloworld-service-v1-....     1/1       Running   0          20s
-
-4 -  All of the container output to STDOUT and STDERR will be accessible as Kubernetes logs:
-
-`kubectl logs helloworld-service-v1-...`
+    `kubectl logs helloworld-service-v1-...`
 
 
 ## Explanation
@@ -75,4 +75,4 @@ There are other containers running too. The interesting one is the pause contain
 A pause container is how Kubernetes uses Docker containers to create shared namespaces so that the actual application containers within the same Pod can share resources.
 
 
-#### [Continue to Exercise 3 - Creating a Kubernetes Service](../exercise-3/README.md)
+#### [Continue to Exercise 3 - Creating a Kubernetes service](../exercise-3/README.md)
