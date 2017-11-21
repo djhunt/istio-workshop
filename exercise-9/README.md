@@ -111,13 +111,13 @@ route:
     istioctl create -f guestbook/route-rule-user-agent-chrome.yaml
     ```
 
-2. Navigate to http://$INGRESS_IP/echo/universe in Chrome. You should see:
+2. Navigate to `http://$INGRESS_IP/echo/universe` in Chrome. You should see:
     
     ```
     Hola test from helloworld-service-v2-87744028-x20j0 version 2.0
     ```
 
-3. Navigate to http://$INGRESS_IP/echo/universe in another browser. You should see:
+3. Navigate to `http://$INGRESS_IP/echo/universe` in another browser. You should see:
 
     ```
     Hello sdsdffsd from helloworld-service-v1-4086392344-42q21 with 1.0
