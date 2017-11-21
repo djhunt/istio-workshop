@@ -107,9 +107,9 @@ route:
 
 1. To apply this route rule, run:
 
-```sh
-istioctl create -f guestbook/route-rule-user-agent-chrome.yaml
-```
+    ```sh
+    istioctl create -f guestbook/route-rule-user-agent-chrome.yaml
+    ```
 
 2. Navigate to http://$INGRESS_IP/echo/universe in Chrome. You should see:
     
