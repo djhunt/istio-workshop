@@ -1,6 +1,5 @@
 ## Workshop Setup
-- [Setup for the workshop](setup/README.md)
-- [Exercise 1 - Bluemix Container Service Setup](exercise-1/README.md)
+- [Exercise 1 - Access Kubernetes cluster](exercise-1/README.md)
 
 ## Exploring Kubernetes
 
