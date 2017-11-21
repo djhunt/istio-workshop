@@ -1,6 +1,8 @@
 # Exercise 1 - Accessing a Kubernetes cluster with IBM Cloud Container Service
 
-## Install IBM Cloud Container Service command line utilities
+Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisioned for you. Here are the steps to access your cluster:
+
+### Install IBM Cloud Container Service command line utilities
 
 1. Install the IBM Cloud [command line interface](https://clis.ng.bluemix.net/ui/home.html).
 
@@ -30,7 +32,7 @@
     3. Convert the binary file to an executable with `chmod +x /usr/local/bin/kubectl`.
 
 
-## Access your cluster
+### Access your cluster
 
 1. Set the context for your cluster in your CLI. Every time you log in to the IBM Bluemix Container Service CLI to work with the cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
 
