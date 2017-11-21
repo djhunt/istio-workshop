@@ -26,16 +26,7 @@ kubectl delete all --all
 
 ### Install Istio on the Kubernetes cluster
 
-1. Get the IBMid for the current user.
-    
-    * If you created your own cluster, run the following command and note the returned IBMid:
-    ``` 
-    bx account users
-    ```
-
-    * If the cluster was provisioned for you by IBM, use the IBMid provided to you.
-
-2. Grant cluster admin permissions to the current user. Admin permissions are required to create the necessary RBAC rules for Istio.
+1. Grant cluster admin permissions to the current user. Admin permissions are required to create the necessary RBAC rules for Istio.
 
     ```
     kubectl create clusterrolebinding cluster-admin-binding \
@@ -43,7 +34,7 @@ kubectl delete all --all
         --user=[IBMid]
     ```
 
-3. Change the directory to the Istio file location.
+2. Change the directory to the Istio file location.
 
    ```
    cd [path_to_istio-0.2.12]
