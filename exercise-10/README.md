@@ -1,91 +1,104 @@
-## Exercise 10 - Fault Injection and Rate Limiting
+# Exercise 10 - Fault injection and rate limiting
 
 #### Overview of Istio Mixer
 
 See the overview of Mixer at [istio.io](https://istio.io/docs/concepts/policy-and-control/mixer.html).
 
-#### Service Isolation Using Mixer
+### Service isolation using Mixer
 
-We'll block access to the Hello World service by adding the mixer-rule-denial.yaml rule shown below:
+1. Block access to the Hello World service.
 
-```yaml
-# Create a denier that returns a google.rpc.Code 7 (PERMISSION_DENIED)
-apiVersion: "config.istio.io/v1alpha2"
-kind: denier
-metadata:
-  name: denyall
-  namespace: istio-system
-spec:
-  status:
-    code: 7
-    message: Not allowed
----
-# The (empty) data handed to denyall at run time
-apiVersion: "config.istio.io/v1alpha2"
-kind: checknothing
-metadata:
-  name: denyrequest
-  namespace: istio-system
-spec:
----
-# The rule that uses denier to deny requests to the helloworld service
-apiVersion: "config.istio.io/v1alpha2"
-kind: rule
-metadata:
-  name: deny-hello-world
-  namespace: istio-system
-spec:
-  match: destination.service=="helloworld-service.default.svc.cluster.local"
-  actions:
-  - handler: denyall.denier
-    instances:
-    - denyrequest.checknothing
-```
+    ```sh
+    istioctl create -f guestbook/mixer-rule-denial.yaml
+    ```
 
-```sh
-istioctl create -f guestbook/mixer-rule-denial.yaml
-```
+    This creates the `mixer-rule-denial.yaml` rule:
 
-Verify that access is now denied:
-```sh
-curl http://$INGRESS_IP/hello/world
-```
+    ```yaml
+    # Create a denier that returns a google.rpc.Code 7 (PERMISSION_DENIED)
+    apiVersion: "config.istio.io/v1alpha2"
+    kind: denier
+    metadata:
+      name: denyall
+      namespace: istio-system
+    spec:
+      status:
+        code: 7
+        message: Not allowed
+    ---
+    # The (empty) data handed to denyall at run time
+    apiVersion: "config.istio.io/v1alpha2"
+    kind: checknothing
+    metadata:
+      name: denyrequest
+      namespace: istio-system
+    spec:
+    ---
+    # The rule that uses denier to deny requests to the helloworld service
+    apiVersion: "config.istio.io/v1alpha2"
+    kind: rule
+    metadata:
+      name: deny-hello-world
+      namespace: istio-system
+    spec:
+      match: destination.service=="helloworld-service.default.svc.cluster.local"
+      actions:
+      - handler: denyall.denier
+        instances:
+        - denyrequest.checknothing
+    ```
 
-#### Block Access to v2 of the hello world service
+2. Verify that access is now denied.
+    
+    ```sh
+    curl http://$INGRESS_IP/hello/world
+    ```
 
-```yaml
-# The rule that uses denier to deny requests to version 2.0 of the helloworld service
-apiVersion: "config.istio.io/v1alpha2"
-kind: rule
-metadata:
-  name: deny-hello-world
-  namespace: istio-system
-spec:
-  match: destination.service=="helloworld-service.default.svc.cluster.local" && destination.labels["version"] == "2.0"
-  actions:
-  - handler: denyall.denier
-    instances:
-    - denyrequest.checknothing
-```
+3. Clean up the rule.
+    
+    ```sh
+    istioctl delete -f guestbook/mixer-rule-denial.yaml
+    ```
 
-```sh
-istioctl delete -f guestbook/mixer-rule-denial.yaml
-istioctl create -f guestbook/mixer-rule-denial-v2.yaml
-```
+### Block access to v2 of the Hello World service
+ 
+1. Block access to only v2 of the Hello World service deployment.
 
-Check that you can access the v1 service:
-```sh
-curl http://$INGRESS_IP/hello/world
-```
+    ```sh
+    istioctl create -f guestbook/mixer-rule-denial-v2.yaml
+    ```
 
-But you should not be able to access v2:
-```sh
-curl http://$INGRESS_IP/hello/world -A mobile
-```
+    This creates the `mixer-rule-denial-v2.yaml` rule:
 
-Clean up the rule:
+    ```yaml
+    # The rule that uses denier to deny requests to version 2.0 of the helloworld service
+    apiVersion: "config.istio.io/v1alpha2"
+    kind: rule
+    metadata:
+      name: deny-hello-world
+      namespace: istio-system
+    spec:
+      match: destination.service=="helloworld-service.default.svc.cluster.local" && destination.labels["version"] == "2.0"
+      actions:
+      - handler: denyall.denier
+        instances:
+        - denyrequest.checknothing
+    ```
 
-```sh
-istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
-```
+2. Verify that you can access the v1 service:
 
+    ```sh
+    curl http://$INGRESS_IP/hello/world
+    ```
+
+3. Verify that access to v2 is denied:
+   
+    ```sh
+    curl http://$INGRESS_IP/hello/world -A mobile
+    ```
+
+4. Clean up the rule.
+
+    ```sh
+    istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
+    ```
