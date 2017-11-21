@@ -1,6 +1,5 @@
 ## Workshop Setup
-- [Exercise 0 - Setup for the workshop](setup/README.md)
-- [Exercise 1 - Setting up a Kubernetes cluster with IBM Cloud Container Service](exercise-1/README.md)
+- [Exercise 1 - Accessing a Kubernetes cluster with IBM Cloud Container Service](exercise-1/README.md)
 
 ## Exploring Kubernetes
 
