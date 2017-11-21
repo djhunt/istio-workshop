@@ -1,6 +1,6 @@
 # Exercise 9 - Request routing and canary deployments
 
-Before modifying any of the routes, a default route must be set to just v1 of the Hello World service deployment. Otherwise, the round robin between v1 and v2 of the service deployment will continue.
+Before modifying any of the routes, a default route must be set to just `v1` of the Hello World service deployment. Otherwise, the round robin between `v1` and `v2` of the service deployment will continue.
 
 ### Configure the default route for the Hello World service
 
@@ -32,7 +32,7 @@ Before modifying any of the routes, a default route must be set to just v1 of th
           Version:  1.0
     ```
 
-2. Now when you curl the echo service, it should always return v1 of the Hello World service.
+2. Now when you curl the echo service, it should always return `v1` of the Hello World service.
 
     ```sh
     curl http://$INGRESS_IP/echo/universe  
@@ -72,7 +72,7 @@ Note that rules with a higher precedence number are applied first. If a preceden
     istioctl create -f guestbook/route-rule-canary.yaml
     ```
 
-2. Now when you curl the end point, set the user agent to be mobile. You should only see v2.
+2. Now when you curl the end point, set the user agent to be mobile. You should only see `v2`.
 
     ```sh
     curl http://$INGRESS_IP/echo/universe -A mobile
@@ -80,7 +80,7 @@ Note that rules with a higher precedence number are applied first. If a preceden
     {"greeting":{"hostname":"helloworld-service-v2-3297856697-6m4bp","greeting":"Hello dog2 from helloworld-service-v2-3297856697-6m4bp with 2.0","version":"2.0"}
     ```
     
-    Without the user agent being set the mobile, you should still only see v1:
+    Without the user agent being set the mobile, you should still only see `v1`:
     
     ```sh
     $ curl http://$INGRESS_IP/echo/universe
@@ -92,7 +92,7 @@ Note that the user-agent HTTP header is propagated in the span baggage. Check ou
 
 ### Optional - Route based on the browser
 
-It is also possible to route based on the web browser used. For example, the following rule routes to v2 if the browser is Chrome:
+It is also possible to route based on the web browser used. For example, the following rule routes to `v2` if the browser is Chrome:
 
 ```yaml
 match:
