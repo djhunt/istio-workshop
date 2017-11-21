@@ -99,6 +99,6 @@ See the overview of Mixer at [istio.io](https://istio.io/docs/concepts/policy-an
 
 4. Clean up the rule.
 
-```sh
-istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
-```
+    ```sh
+    istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
+    ```
