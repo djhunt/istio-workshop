@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: istio-fd
+  namespace: istio-system
+spec:
+  tls:
+  - hosts:
+    - xxxx.us-south.containers.mybluemix.net
+    secretName: ssss
+  rules:
+  - host: xxxx.us-south.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: istio-ingress
+          servicePort: 80
+  - host: prometheus.xxxx.us-south.containers.mybluemix.net
+    http:
+      paths:
+       - path: /
+         backend:
+           serviceName: prometheus
+           servicePort: 9090
+  - host: zipkin.xxxx.us-south.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: zipkin
+          servicePort: 9411
+  - host: grafana.xxxx.us-south.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 3000
+  - host: servicegraph.xxxx.us-south.containers.mybluemix.net
+    http:
+      paths:
+       - path: /
+         backend:
+           serviceName: servicegraph
+           servicePort: 8088
