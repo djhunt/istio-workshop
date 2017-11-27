@@ -17,7 +17,7 @@ This is the working directory for the lab.
 1. Deploy the Hello World service to Kubernetes.
 
    ```
-   kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record`
+   kubectl apply -f kubernetes/helloworldservice-deployment.yaml --record
    ```
 
 2. Verify that the service was created. It will take a couple minutes for the pods to be ready.
