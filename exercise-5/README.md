@@ -26,21 +26,13 @@ kubectl delete all --all
 
 ### Install Istio on the Kubernetes cluster
 
-1. Grant cluster admin permissions to the current user. Admin permissions are required to create the necessary RBAC rules for Istio.
-
-    ```
-    kubectl create clusterrolebinding cluster-admin-binding \
-        --clusterrole=cluster-admin \
-        --user=[IBMid]
-    ```
-
-2. Change the directory to the Istio file location.
+1. Change the directory to the Istio file location.
 
    ```
    cd [path_to_istio-0.2.12]
    ```
 
-3. Install Istio on the Kubernetes cluster.
+2. Install Istio on the Kubernetes cluster.
 
    ```
    kubectl apply -f install/kubernetes/istio.yaml
