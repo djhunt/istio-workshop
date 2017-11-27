@@ -31,7 +31,7 @@ Curl the external IP address to test the Hello World service.
 
 #### Optional - Curl the service using a DNS name
 
-If you log in into another container, you can access the Hello World service via the DNS name. For example, start `tutum/curl` to get a shell and curl the service using the service name:
+If you log in to another container, you can access the Hello World service via the DNS name. For example, start `tutum/curl` to get a shell and curl the service using the service name:
 
 ```
 kubectl run curl --image=tutum/curl -i --tty
