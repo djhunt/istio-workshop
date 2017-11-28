@@ -55,8 +55,9 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
     ```
 5. Verify all three worker are available.     
 
-    ```
+    ```
     kubectl get nodes
     ```
+
 
 #### [Continue to Exercise 5 - Installing Istio](../exercise-5/README.md)
