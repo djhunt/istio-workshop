@@ -28,11 +28,10 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     1. Move the executable file to the `/usr/local/bin` directory with `mv /<path_to_file>/kubectl/usr/local/bin/kubectl`.
 
     2. Make sure that `/usr/local/bin` is listed in your PATH system variable.
-
-            ```
-            echo $PATH
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
+       ```
+       echo $PATH
+       /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+       ```
     3. Convert the binary file to an executable with `chmod +x /usr/local/bin/kubectl`.
 
 
