@@ -53,7 +53,7 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
     kubectl uncordon [name1]
     kubectl uncordon [name2]
     ```
-5. Verify all three worker are available.     
+5. Verify all three workers are available.     
 
     ```
     kubectl get nodes
