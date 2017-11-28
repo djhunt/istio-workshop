@@ -29,7 +29,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
     2. Make sure that `/usr/local/bin` is listed in your PATH system variable.
 
-            ```txt
+            ```
             echo $PATH
             /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
             ```
