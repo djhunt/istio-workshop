@@ -38,7 +38,7 @@
     kubectl scale deployment helloworld-service-v1 --replicas=20
     ```
 
-If you look at the pod status, some of the pods will show a `Pending` state. That is because we have cordoned two worker nodes, leaving only one available for scheduling. And the underlying infrastructure has run out of capacity to run the containers with the requested resources.
+If you look at the pod status, some of the pods will show a `Pending` state. That is because we have cordoned one worker node, leaving only two available for scheduling. And the underlying infrastructure has run out of capacity to run the containers with the requested resources.
 
 3. Pick a pod name that has a `Pending` state to confirm the lack of resources in the detailed status.
 
@@ -50,13 +50,13 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
 
     ```
     kubectl get nodes
-    kubectl uncordon [name1]
-    kubectl uncordon [name2]
+    kubectl uncordon [name]
     ```
-5. Verify all three workers are available.     
+5. Verify all three workers are available and the pending pod is rescheduled.     
 
     ```
     kubectl get nodes
+    kubectl describe pod helloworld-service...
     ```
 
 
