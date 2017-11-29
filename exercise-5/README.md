@@ -49,11 +49,13 @@ kubectl apply -f install/kubernetes/addons/servicegraph.yaml
 
 ### View the Istio deployments
 
-Istio is deployed in a separate Kubernetes namespace, `istio-system`. You can watch the state of Istio and other services and pods using the watch command.  For example in 2 separate terminal windows run:
+Istio is deployed in a separate Kubernetes namespace `istio-system`  You can watch the state of Istio and other services and pods using the watch flag (`-w`) when listing Kubernetes resources. For example, in two separate terminal windows run:
 
+```sh
+kubectl get pods -w --all-namespaces
 ```
-kubectl get po --all-namespaces
-kubectl get svc --all-namespaces
+```sh
+kubectl get services -w --all-namespaces
 ```
 
 #### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-6/README.md)
