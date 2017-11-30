@@ -6,17 +6,15 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 1. Install the IBM Cloud [command line interface](https://clis.ng.bluemix.net/ui/home.html).
 
-2. Log in to the IBM Cloud CLI:   
-   Use your IBM API key     
-   `bx login -u ibmcloudxx@us.ibm.com --apikey xxxx`   
-   OR through the single sign on     
-   `bx login --sso`   
+2. Log in to the IBM Cloud CLI with IBM API key:   
+   `bx login -u ibmcloudxx@us.ibm.com --apikey xxxx`      
 
 3. Install the IBM Cloud Container Service plug-in with `bx plugin install container-service -r Bluemix`.
 
 4. To verify that the plug-in is installed properly, run `bx plugin list`. The Container Service plug-in is displayed in the results as `container-service`.
 
-5. Initialize the Container Service plug-in with `bx cs init`.
+5. Initialize the Container Service plug-in and point the endpoint to us-east.   
+   `bx cs init --host=https://us-east.containers.bluemix.net`
 
 6. Install the Kubernetes CLI. Click the link corresponding to your operating system:
 
@@ -39,8 +37,9 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 1. Set the context for your cluster in your CLI. Every time you log in to the IBM Bluemix Container Service CLI to work with the cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
 
-    a. Download the configuration file and certificates for your cluster using the `cluster-config` command.
+    a. List the clusters, download the configuration file and certificates for your cluster using the `cluster-config` command.
     ```bash
+    bx cs clusters
     bx cs cluster-config [your_cluster_name]
     
     export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/wordpress/kube-config-dal10-wordpress.yml
