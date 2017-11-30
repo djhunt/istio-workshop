@@ -40,11 +40,12 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     a. List the clusters, download the configuration file and certificates for your cluster using the `cluster-config` command.
     ```bash
     bx cs clusters
-    bx cs cluster-config [your_cluster_name]
-    
-    export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/wordpress/kube-config-dal10-wordpress.yml
+    bx cs cluster-config guestbook
     ```
-
+    Copy the next line from your terminal, not here:
+    ```
+    export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/guestbook/kube-config-dal10-guestbook.yml
+    ```
     b. Copy and paste the command from the previous step to set the `KUBECONFIG` environment variable and configure your CLI to run `kubectl` commands against your cluster.
 
 2. Create a proxy to your Kubernetes API server.
@@ -56,7 +57,8 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
 4. Verify the worker nodes in the cluster.   
     ```
-    bx cs workers [your_cluster_name] 
+    bx cs workers guestbook
+    bx cs worker-get [worker name]
     ```
 
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
