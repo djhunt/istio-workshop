@@ -57,6 +57,7 @@ Note that the services must be started in a fixed order because they depend on o
 1. Deploy MySQL, Redis, the Hello World microservices, and the associated Kubernetes Services from the `istio-workshop` dir:
 
     ```sh
+    cd ../istio-workshop
     kubectl apply -f guestbook/mysql-deployment.yaml -f guestbook/mysql-service.yaml
     kubectl apply -f guestbook/redis-deployment.yaml -f guestbook/redis-service.yaml
     kubectl apply -f guestbook/helloworld-deployment.yaml -f guestbook/helloworld-service.yaml
