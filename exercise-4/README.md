@@ -35,7 +35,7 @@
 2. Try scaling out further.
 
     ```
-    kubectl scale deployment helloworld-service-v1 --replicas=20
+    kubectl scale deployment helloworld-service-v1 --replicas=17
     ```
 
 If you look at the pod status, some of the pods will show a `Pending` state. That is because we have cordoned one worker node, leaving only two available for scheduling. And the underlying infrastructure has run out of capacity to run the containers with the requested resources.
@@ -46,12 +46,17 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
     kubectl describe pod helloworld-service...
     ```
 
-4. Uncordon the two workers to be available for scheduling.
+4. Uncordon the worker to be available for scheduling.
 
     ```
     kubectl get nodes
     ```
-    Pick the one node with "not-ready" status
+    Open another terminal, do the `export KUBECONFIG ...` command in [Lab 1](../exercise-1/README.md) and run:
+    ```
+    kubectl get po -w -o wide
+    ```
+    This will monitor the recovering process.
+    Go back the working terminal. Pick the one node with "not-ready" status and run:
     ```
     kubectl uncordon [name]
     ```
