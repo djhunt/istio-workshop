@@ -77,7 +77,7 @@ Note that rules with a higher precedence number are applied first. If a preceden
     ```sh
     curl http://$INGRESS_IP/echo/universe -A mobile
 
-    {"greeting":{"hostname":"helloworld-service-v2-3297856697-6m4bp","greeting":"Hello dog2 from helloworld-service-v2-3297856697-6m4bp with 2.0","version":"2.0"}
+    {"greeting":{"hostname":"helloworld-service-v2-3297856697-6m4bp","greeting":"Hola world from helloworld-service-v2-1131997838-qnwcm version 2.0","version":"2.0"}
     ```
     
     Without the user agent being set to mobile, you should still only see `v1`:
