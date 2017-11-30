@@ -56,7 +56,7 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
 
     ```
     kubectl get nodes
-    kubectl describe pod helloworld-service...
+    kubectl get pods -o wide
     ```
 
 
