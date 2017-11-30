@@ -50,6 +50,9 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
 
     ```
     kubectl get nodes
+    ```
+    Pick the one node with "not-ready" status
+    ```
     kubectl uncordon [name]
     ```
 5. Verify all three workers are available and the pending pod is rescheduled.     
