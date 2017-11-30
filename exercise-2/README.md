@@ -35,7 +35,7 @@ This is the working directory for the lab.
     kubectl delete pod helloworld-service-v1-...
     ```
 
-4. Kubernetes will automatically restart this pod for you. Verify that it restarted and reach the `running` state.
+4. Kubernetes will automatically restart this pod for you. Verify that it restarted and reach the `Running` state.
 
     ```bash
     kubectl get pods
