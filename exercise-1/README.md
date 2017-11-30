@@ -53,6 +53,10 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     kubectl proxy
     ```
     
-3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.
+3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
+4. Verify the worker nodes in the cluster.   
+    ```
+    bx cs workers [your_cluster_name] 
+    ```
 
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
