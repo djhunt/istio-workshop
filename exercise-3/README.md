@@ -26,7 +26,7 @@ In Kubernetes, you can instruct the underlying infrastructure to create an exter
 Curl the external IP address to test the Hello World service.
 
     ```
-    curl 169.47.103.138:8080/hello/world
+    curl [EXTERNAL-IP]:8080/hello/world
     ```
 
 #### Optional - Curl the service using a DNS name
