@@ -35,10 +35,10 @@
 2. Try scaling out further.
 
     ```
-    kubectl scale deployment helloworld-service-v1 --replicas=12
+    kubectl scale deployment helloworld-service-v1 --replicas=17
     ```
 
-If you look at the pod status, some of the pods will show a `Pending` state. That is because we only have four physical nodes, and the underlying infrastructure has run out of capacity to run the containers with the requested resources.
+If you look at the pod status, some of the pods will show a `Pending` state. That is because we have cordoned one worker node, leaving only two available for scheduling. And the underlying infrastructure has run out of capacity to run the containers with the requested resources.
 
 3. Pick a pod name that has a `Pending` state to confirm the lack of resources in the detailed status.
 
@@ -46,23 +46,26 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
     kubectl describe pod helloworld-service...
     ```
 
-4. Verify that the new instance has joined the Kubernetes cluster.
+4. Uncordon the worker to be available for scheduling.
 
     ```
     kubectl get nodes
     ```
+    Open another terminal, do the `export KUBECONFIG ...` command in [Lab 1](../exercise-1/README.md) and run:
     ```
-    kubectl scale deployment helloworld-service-v1 --replicas=4
+    kubectl get po -w -o wide
+    ```
+    This will monitor the recovering process.
+    Go back the working terminal. Pick the one node with "not-ready" status and run:
+    ```
+    kubectl uncordon [name]
+    ```
+5. Verify all three workers are available and the pending pod is rescheduled.     
+
+    ```
+    kubectl get nodes
+    kubectl get pods -o wide
     ```
 
-5. Clean up your resources.
-
-    ```
-    kubectl delete deployment helloworld-service-v1
-    ```
-    
-    ```
-    kubectl delete svc helloworld-service
-    ```  
 
 #### [Continue to Exercise 5 - Installing Istio](../exercise-5/README.md)

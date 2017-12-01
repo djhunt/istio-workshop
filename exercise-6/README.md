@@ -35,7 +35,7 @@ name: istio-proxy
 Istio sidecars can also be automatically injected into a pod before deployment using an alpha feature in Kubernetes called Initializers. The istio-sidecar InitializerConfiguration is resource that specifies resources where Istio sidecar should be injected. By default, the Istio sidecar will be injected into deployments, statefulsets, jobs, and daemonsets. This is set up by running the following from the `istio-0.2.12` dir:
 
 ```sh
-kubectl apply -f istio-0.2.12/install/kubernetes/istio-initializer.yaml
+kubectl apply -f install/kubernetes/istio-initializer.yaml
 ```
 
 This adds `sidecar.initializer.istio.io` to the Kubernetes list of pending initializers in the workload. The istio-initializer controller observes resources as they are deployed to Kubernetes and automatically injects the Istio Proxy sidecar by injecting the sidecar template.
@@ -57,6 +57,7 @@ Note that the services must be started in a fixed order because they depend on o
 1. Deploy MySQL, Redis, the Hello World microservices, and the associated Kubernetes Services from the `istio-workshop` dir:
 
     ```sh
+    cd ../istio-workshop
     kubectl apply -f guestbook/mysql-deployment.yaml -f guestbook/mysql-service.yaml
     kubectl apply -f guestbook/redis-deployment.yaml -f guestbook/redis-service.yaml
     kubectl apply -f guestbook/helloworld-deployment.yaml -f guestbook/helloworld-service.yaml

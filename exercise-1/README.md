@@ -6,13 +6,15 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 1. Install the IBM Cloud [command line interface](https://clis.ng.bluemix.net/ui/home.html).
 
-2. Log in to the IBM Cloud CLI with `bx login`. Enter your IBM Cloud credentials when prompted.
+2. Log in to the IBM Cloud CLI with IBM API key:   
+   `bx login -u ibmcloudxx@us.ibm.com --apikey xxxx`      
 
 3. Install the IBM Cloud Container Service plug-in with `bx plugin install container-service -r Bluemix`.
 
 4. To verify that the plug-in is installed properly, run `bx plugin list`. The Container Service plug-in is displayed in the results as `container-service`.
 
-5. Initialize the Container Service plug-in with `bx cs init`.
+5. Initialize the Container Service plug-in and point the endpoint to us-east.   
+   `bx cs init --host=https://us-east.containers.bluemix.net`
 
 6. Install the Kubernetes CLI. Click the link corresponding to your operating system:
 
@@ -24,11 +26,10 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     1. Move the executable file to the `/usr/local/bin` directory with `mv /<path_to_file>/kubectl/usr/local/bin/kubectl`.
 
     2. Make sure that `/usr/local/bin` is listed in your PATH system variable.
-
-            ```txt
-            echo $PATH
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
+       ```
+       echo $PATH
+       /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+       ```
     3. Convert the binary file to an executable with `chmod +x /usr/local/bin/kubectl`.
 
 
@@ -36,13 +37,15 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 1. Set the context for your cluster in your CLI. Every time you log in to the IBM Bluemix Container Service CLI to work with the cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
 
-    a. Download the configuration file and certificates for your cluster using the `cluster-config` command.
+    a. List the clusters, download the configuration file and certificates for your cluster using the `cluster-config` command.
     ```bash
-    bx cs cluster-config [your_cluster_name]
-    
-    export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/wordpress/kube-config-dal10-wordpress.yml
+    bx cs clusters
+    bx cs cluster-config guestbook
     ```
-
+    Copy the next line from your terminal, not here:
+    ```
+    export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/guestbook/kube-config-dal10-guestbook.yml
+    ```
     b. Copy and paste the command from the previous step to set the `KUBECONFIG` environment variable and configure your CLI to run `kubectl` commands against your cluster.
 
 2. Create a proxy to your Kubernetes API server.
@@ -51,6 +54,11 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     kubectl proxy
     ```
     
-3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.
+3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
+4. Verify the worker nodes in the cluster.   
+    ```
+    bx cs workers guestbook
+    bx cs worker-get [worker name]
+    ```
 
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
