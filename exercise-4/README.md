@@ -48,20 +48,20 @@ If you look at the pod status, some of the pods will show a `Pending` state. Tha
 
 4. Uncordon the worker to be available for scheduling.
 
-    1. Open another terminal, do the `export KUBECONFIG ...` command in [Lab 1](../exercise-1/README.md) and run:
+    a. Open another terminal, do the `export KUBECONFIG ...` command in [Lab 1](../exercise-1/README.md) and run:
         
         ```
         kubectl get po -w -o wide
         ```
         This will monitor the recovering process.
     
-    2. Go back the working terminal. Get the name of the worker that has status "not-ready".
+    b. Go back the working terminal. Get the name of the worker that has status "not-ready".
        
         ```
         kubectl get nodes
         ```
     
-    2.  Undordon the worker to make it available for scheduling.
+    c.  Undordon the worker to make it available for scheduling.
         
         ```
         kubectl uncordon [name]
