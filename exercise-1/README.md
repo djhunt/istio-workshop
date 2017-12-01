@@ -37,16 +37,19 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 1. Set the context for your cluster in your CLI. Every time you log in to the IBM Bluemix Container Service CLI to work with the cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
 
-    a. List the clusters, download the configuration file and certificates for your cluster using the `cluster-config` command.
+    a. List the available clusters. You should see the cluster `guestbook`.
+    
     ```bash
     bx cs clusters
+    ```
+    
+    b. Download the configuration file and certificates for your `guestbook` cluster using the `cluster-config` command.
+    
+    ```bash
     bx cs cluster-config guestbook
     ```
-    Copy the next line from your terminal, not here:
-    ```
-    export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/guestbook/kube-config-dal10-guestbook.yml
-    ```
-    b. Copy and paste the command from the previous step to set the `KUBECONFIG` environment variable and configure your CLI to run `kubectl` commands against your cluster.
+    
+    c. Copy and paste the output command from the previous step to set the `KUBECONFIG` environment variable and configure your CLI to run `kubectl` commands against your cluster.
 
 2. Create a proxy to your Kubernetes API server.
 
@@ -55,6 +58,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     ```
     
 3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
+
 4. Verify the worker nodes in the cluster.   
     ```
     bx cs workers guestbook
