@@ -46,7 +46,7 @@ This is the working directory for the lab.
     helloworld-service-v1-....     1/1       Running   0           20s
     ```
 
-5. All of the container output to STDOUT and STDERR will be accessible as Kubernetes logs.
+5. All of the container output to STDOUT and STDERR from the restarted pod will be accessible as Kubernetes logs.
 
     ```
     kubectl logs helloworld-service-v1-...
