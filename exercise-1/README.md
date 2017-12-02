@@ -59,7 +59,12 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     
 3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
 
-4. Verify the worker nodes in the cluster.   
+4. View details of your cluster.
+    ```
+    bx cs cluster-get guestbook
+    ```
+
+5. Verify the worker nodes in the cluster.   
     ```
     bx cs workers guestbook
     bx cs worker-get [worker name]
