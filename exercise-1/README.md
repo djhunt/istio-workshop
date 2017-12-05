@@ -14,7 +14,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 4. To verify that the plug-in is installed properly, run `bx plugin list`. The Container Service plug-in is displayed in the results as `container-service`.
 
 5. Initialize the Container Service plug-in and point the endpoint to us-east.   
-   `bx cs init --host=https://us-east.containers.bluemix.net`
+   `bx cs region-set us-east`
 
 6. Install the Kubernetes CLI. Click the link corresponding to your operating system:
 
