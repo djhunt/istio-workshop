@@ -23,7 +23,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 * OS X: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl
 * Linux: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl. If you are using OSX or Linux, complete the following steps.
 
-    1. Move the executable file to the `/usr/local/bin` directory with `mv /<path_to_file>/kubectl/usr/local/bin/kubectl`.
+    1. Move the executable file to the `/usr/local/bin` directory with `mv /<path_to_file>/kubectl /usr/local/bin/kubectl`.
 
     2. Make sure that `/usr/local/bin` is listed in your PATH system variable.
        ```
